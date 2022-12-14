@@ -1,5 +1,8 @@
 const express = require('express');
+const { emailValidation } = require('./middlewares/emailValidation');
+const passwordValidation = require('./middlewares/passwordValidation');
 const readTalker = require('./utils/fs/readTalker');
+const tokenGenerator = require('./utils/tokenGenerator');
 
 const app = express();
 app.use(express.json());
@@ -28,6 +31,10 @@ app.get('/talker/:id', async (request, response) => {
     .json({ message: 'Pessoa palestrante não encontrada' });
   }
   response.status(HTTP_OK_STATUS).json(dataById); 
+});
+
+app.post('/login', emailValidation, passwordValidation, (_request, response) => {
+  response.status(HTTP_OK_STATUS).json({ token: tokenGenerator() });
 });
 
 app.listen(PORT, () => {
