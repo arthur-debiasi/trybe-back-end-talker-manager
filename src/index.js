@@ -1,41 +1,25 @@
 const express = require('express');
-const { emailValidation } = require('./middlewares/emailValidation');
-const passwordValidation = require('./middlewares/passwordValidation');
-const readTalker = require('./utils/fs/readTalker');
-const tokenGenerator = require('./utils/tokenGenerator');
+const loginRouter = require('./routes/loginRouter');
+const talkerRouter = require('./routes/talkerRouter');
 
 const app = express();
 app.use(express.json());
 
 const PORT = '3000';
 const HTTP_OK_STATUS = 200;
-const HTTP_BAD_REQUEST_STATUS = 404;
+// const HTTP_BAD_REQUEST_STATUS = 404;
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
-app.get('/talker', async (_request, response) => {
-  const data = await readTalker();
-  response.status(HTTP_OK_STATUS).json(data); 
-});
+app.use('/talker', talkerRouter);
+app.use('/login', loginRouter);
 
-app.get('/talker/:id', async (request, response) => {
-  const { id } = request.params;
-  const data = await readTalker();
-  const dataById = data.filter((e) => e.id === Number(id))[0] || [];
-  if (dataById.length === 0) {
-    return response
-    .status(HTTP_BAD_REQUEST_STATUS)
-    .json({ message: 'Pessoa palestrante não encontrada' });
-  }
-  response.status(HTTP_OK_STATUS).json(dataById); 
-});
-
-app.post('/login', emailValidation, passwordValidation, (_request, response) => {
-  response.status(HTTP_OK_STATUS).json({ token: tokenGenerator() });
-});
+// app.post('/login', emailValidation, passwordValidation, (_request, response) => {
+//   response.status(HTTP_OK_STATUS).json({ token: tokenGenerator() });
+// });
 
 app.listen(PORT, () => {
   console.log('Online');
