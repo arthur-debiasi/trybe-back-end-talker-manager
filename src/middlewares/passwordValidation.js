@@ -1,4 +1,4 @@
-const HTTP_BAD_REQUEST_STATUS = 400;
+const { HTTP_BAD_REQUEST_STATUS } = require('../utils/httpStatus/httpStatus');
 
 const passwordValidation = (req, res, next) => {
   if (!req.body.password || req.body.password.length === 0) {
