@@ -1,6 +1,6 @@
-const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i; // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
+const { HTTP_BAD_REQUEST_STATUS } = require('../utils/httpStatus/httpStatus');
 
-const HTTP_BAD_REQUEST_STATUS = 400;
+const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i; // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
 
 const emailValidation = (req, res, next) => {
   if (!req.body.email || req.body.email.length === 0) {
