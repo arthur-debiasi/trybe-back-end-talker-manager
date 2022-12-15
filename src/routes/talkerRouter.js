@@ -1,6 +1,10 @@
 const express = require('express');
 const readTalker = require('../utils/fs/readTalker');
-const { HTTP_OK_STATUS, HTTP_BAD_REQUEST_STATUS } = require('../utils/httpStatus/httpStatus');
+const { 
+  HTTP_OK_STATUS,
+  HTTP_BAD_REQUEST_STATUS,
+  HTTP_CREATED_STATUS, 
+} = require('../utils/httpStatus/httpStatus');
 
 const talkerRouter = express.Router();
 
@@ -19,6 +23,10 @@ talkerRouter.get('/:id', async (request, response) => {
     .json({ message: 'Pessoa palestrante não encontrada' });
   }
   response.status(HTTP_OK_STATUS).json(dataById); 
+});
+
+talkerRouter.post('/', (request, response) => {
+  response.status(HTTP_CREATED_STATUS).json({ message: 'oie' });
 });
 
 module.exports = talkerRouter;

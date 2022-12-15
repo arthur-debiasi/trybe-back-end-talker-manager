@@ -17,10 +17,6 @@ app.get('/', (_request, response) => {
 app.use('/talker', talkerRouter);
 app.use('/login', loginRouter);
 
-// app.post('/login', emailValidation, passwordValidation, (_request, response) => {
-//   response.status(HTTP_OK_STATUS).json({ token: tokenGenerator() });
-// });
-
 app.listen(PORT, () => {
   console.log('Online');
 });
