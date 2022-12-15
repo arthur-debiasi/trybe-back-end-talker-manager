@@ -1,8 +1,9 @@
 const express = require('express');
+const tokenValidation = require('../middlewares/tokenValidation');
 const readTalker = require('../utils/fs/readTalker');
 const { 
   HTTP_OK_STATUS,
-  HTTP_BAD_REQUEST_STATUS,
+  HTTP_NOT_FOUND_STATUS,
   HTTP_CREATED_STATUS, 
 } = require('../utils/httpStatus/httpStatus');
 
@@ -19,13 +20,13 @@ talkerRouter.get('/:id', async (request, response) => {
   const dataById = data.filter((e) => e.id === Number(id))[0] || [];
   if (dataById.length === 0) {
     return response
-    .status(HTTP_BAD_REQUEST_STATUS)
+    .status(HTTP_NOT_FOUND_STATUS)
     .json({ message: 'Pessoa palestrante não encontrada' });
   }
   response.status(HTTP_OK_STATUS).json(dataById); 
 });
 
-talkerRouter.post('/', (request, response) => {
+talkerRouter.post('/', tokenValidation, (request, response) => {
   response.status(HTTP_CREATED_STATUS).json({ message: 'oie' });
 });
 
