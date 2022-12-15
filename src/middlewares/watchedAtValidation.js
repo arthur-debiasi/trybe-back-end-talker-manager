@@ -5,7 +5,7 @@ const watchedAtValidation = (request, response, next) => {
   const { talk: { watchedAt } } = request.body;
   if (!watchedAt) {
     return response.status(HTTP_BAD_REQUEST_STATUS)
-    .json({ message: 'O campo watchedAt é obrigatório' });
+    .json({ message: 'O campo "watchedAt" é obrigatório' });
   }
   if (!dateValidFormat(watchedAt)) {
     return response.status(HTTP_BAD_REQUEST_STATUS)
