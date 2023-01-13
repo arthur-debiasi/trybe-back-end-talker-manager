@@ -2,12 +2,15 @@ const express = require('express');
 const { writeFile } = require('fs').promises;
 const path = require('path');
 const talkerPostValidation = require('../middlewares/talkerPostValidation');
+const tokenValidation = require('../middlewares/tokenValidation');
 const postTalker = require('../utils/fs/postTalker');
 const readTalker = require('../utils/fs/readTalker');
+const writeTalker = require('../utils/fs/writeTalker');
 const { 
   HTTP_OK_STATUS,
   HTTP_NOT_FOUND_STATUS,
-  HTTP_CREATED_STATUS, 
+  HTTP_CREATED_STATUS,
+  HTTP_NO_CONTENT_STATUS, 
 } = require('../utils/httpStatus/httpStatus');
 const nextTalkerIndex = require('../utils/nextTalkerIndex');
 
@@ -61,6 +64,13 @@ talkerRouter.put('/:id', talkerPostValidation, async (request, response) => {
   const talkerPwd = path.resolve('src', 'talker.json');
   await writeFile(talkerPwd, newTalkerFile);
   response.status(HTTP_OK_STATUS).json(newTalker); 
+});
+
+talkerRouter.delete('/:id', tokenValidation, async (request, response) => {
+  const paramsId = Number(request.params.id);
+  const talkerFile = (await readTalker()).filter((talker) => talker.id !== paramsId);
+  await writeTalker(talkerFile);
+  response.status(HTTP_NO_CONTENT_STATUS).end();
 });
 
 module.exports = talkerRouter;
