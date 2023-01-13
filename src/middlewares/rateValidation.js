@@ -2,7 +2,7 @@ const { HTTP_BAD_REQUEST_STATUS } = require('../utils/httpStatus/httpStatus');
 
 const rateValidation = (request, response, next) => {
   const { rate } = request.body.talk;
-  if (!rate) {
+  if (rate === undefined) {
     return response
     .status(HTTP_BAD_REQUEST_STATUS)
     .json({ message: 'O campo "rate" é obrigatório' });

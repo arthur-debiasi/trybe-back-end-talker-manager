@@ -44,7 +44,7 @@ talkerRouter.post('/', talkerPostValidation, async (request, response) => {
   return response.status(HTTP_CREATED_STATUS).json(newTalker);
 });
 
-talkerRouter.put('/:id', async (request, response) => { 
+talkerRouter.put('/:id', talkerPostValidation, async (request, response) => { 
   const { name, age, talk: { watchedAt, rate } } = request.body;
   const talkerFile = await readTalker();
   const paramsId = Number(request.params.id);
