@@ -21,6 +21,13 @@ talkerRouter.get('/', async (_request, response) => {
   response.status(HTTP_OK_STATUS).json(data); 
 });
 
+talkerRouter.get('/search', tokenValidation, async (request, response) => {
+  const { q } = request.query;
+  const data = await readTalker();
+  const result = data.filter(({ name }) => name.toLowerCase().includes(q.toLowerCase()));
+  response.status(HTTP_OK_STATUS).json(result); 
+});
+
 talkerRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
   const data = await readTalker();
