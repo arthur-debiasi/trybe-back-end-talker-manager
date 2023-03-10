@@ -5,14 +5,12 @@ Application for talkers (speakers) data mangaement, in which it is possible to r
 
 ## 🚀 Built With
 
-> [![Javascript][Javascript]][Javascript-url][![React][React.js]][React-url][![MUI][MUI]][MUI-url]
-
+> [![Node.js][Node.js]][Node.js-url][![Docker][Docker]][Docker-url]
 
 ## 📌 Skills
 
-- React state management with Context API;
-- React Hooks: useState, useContext, useEffect and Custom Hooks;
-- Props and PropType validation;
+- Develop a CRUD API (Create, Read, Update and Delete);
+- Develop endpoints for reading and writing to a file using the fs module.
 
 ## Getting Started
 
@@ -48,4 +46,8 @@ Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais
 [React-url]: https://reactjs.org/
 [MUI]: https://img.shields.io/badge/material_ui-007FFF?style=for-the-badge&logo=mui&logoColor=white
 [MUI-url]: https://img.shields.io/badge/material_ui-007FFF?style=for-the-badge&logo=mui&logoColor=white
+[Node.js]: https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=node.js&logoColor=white
+[Node.js-url]: https://nodejs.org/
+[Docker]: https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
+[Docker-url]: https://www.docker.com/
 
